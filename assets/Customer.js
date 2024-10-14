@@ -194,3 +194,49 @@ $('#customerTable').on('click', 'tr', function() {
         }
     })
 });
+
+
+$('#deleteCustomer').on('click' ,function(){
+    var cusId = $('#cusId').val();
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+
+    }).then((result) =>{
+
+        if(result.isConfirmed){
+            $.ajax({
+                method:"DELETE",
+                url:`http://localhost:8080/Spring_Pos/api/v1/customer/${cusId}`,
+                success:function(result){
+                    genarateNextCustomerId();
+                    setCustomerTableValues();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Customer Delete successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    }); 
+                },
+                error:function(result){
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: "Customer Delete failed",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+
+        }
+    })
+    
+})
