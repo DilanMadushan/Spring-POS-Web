@@ -5,6 +5,7 @@ $('#customerButton').on('click', function(){
     $('#orderSection').css({display:'none'});
     $('#cardSection').css({display:'none'});
     genarateNextCustomerId()
+    setCustomerTableValues()
 
 });
 
