@@ -69,22 +69,6 @@ function setCustomerTableValues(){
                 <td class="px-6 py-4">${customer.name}</td>
                 <td class="px-6 py-4">${customer.address}</td>
                 <td class="px-6 py-4">${customer.tel}</td>
-                <td> 
-                <button
-                id="updateCustomer"
-                type="button"
-                class="text-white bg-orange-500 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:orange-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-5"
-              >
-                Update
-              </button>
-              <button
-                id="deleteCustomer"
-                type="button"
-                class="text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-5"
-              >
-                Delete
-              </button>
-            </td>
                 
             </tr>`);
                 
@@ -99,3 +83,48 @@ function setCustomerTableValues(){
     })
 
 }
+
+$('#addCustomer').on('click', function(){
+
+    var cusId = $('#cusId').val();
+    var cusName = $('#cusName').val();
+    var cusAddress = $('#cusAddress').val();
+    var cusTel = $('#cusTel').val();
+
+    var customer = {
+        "cusId":cusId,
+        "name":cusName,
+        "address":cusAddress,
+        "tel":cusTel
+    }
+
+    $.ajax({
+        method:"POST",
+        url: "http://localhost:8080/Spring_Pos/api/v1/customer",
+        processData:"false",
+        contentType: "application/json",
+        data: JSON.stringify(customer),
+        success:function(result){
+            genarateNextCustomerId();
+            setCustomerTableValues();
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Customer Added successfully",
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+        },
+        error: function(result){
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Customer Added failed",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    })
+
+});
