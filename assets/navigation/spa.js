@@ -4,7 +4,7 @@ $('#customerButton').on('click', function(){
     $('#itemSection').css({display:'none'});
     $('#orderSection').css({display:'none'});
     $('#cardSection').css({display:'none'});
-    setCustomerIds();
+    genarateNextCustomerId()
 
 });
 
