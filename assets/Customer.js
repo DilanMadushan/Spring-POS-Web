@@ -107,7 +107,7 @@ $('#addCustomer').on('click', function(){
         contentType: "application/json",
         data: JSON.stringify(customer),
         success:function(result){
-            genarateNextCustomerId();
+            clearFields();
             setCustomerTableValues();
             Swal.fire({
                 position: "top-end",
@@ -152,7 +152,7 @@ $("#updateCustomer").on('click' ,function(){
         contentType: "application/json",
         data: JSON.stringify(customer),
         success:function(result){
-            genarateNextCustomerId();
+            clearFields();
             setCustomerTableValues();
             Swal.fire({
                 position: "top-end",
@@ -215,7 +215,7 @@ $('#deleteCustomer').on('click' ,function(){
                 method:"DELETE",
                 url:`http://localhost:8080/Spring_Pos/api/v1/customer/${cusId}`,
                 success:function(result){
-                    genarateNextCustomerId();
+                    clearFields();
                     setCustomerTableValues();
                     Swal.fire({
                         position: "top-end",
@@ -240,3 +240,11 @@ $('#deleteCustomer').on('click' ,function(){
     })
     
 })
+
+
+function clearFields(){
+    genarateNextCustomerId();
+    $('#cusName').val("");
+    $('#cusAddress').val("");
+    $('#cusTel').val("");
+}
