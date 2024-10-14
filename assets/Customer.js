@@ -84,6 +84,8 @@ function setCustomerTableValues(){
 
 }
 
+
+
 $('#addCustomer').on('click', function(){
 
     var cusId = $('#cusId').val();
@@ -128,3 +130,48 @@ $('#addCustomer').on('click', function(){
     })
 
 });
+
+
+$("#updateCustomer").on('click' ,function(){
+
+    var cusId = $('#cusId').val();
+    var cusName = $('#cusName').val();
+    var cusAddress = $('#cusAddress').val();
+    var cusTel = $('#cusTel').val();
+
+    var customer = {
+        "name":cusName,
+        "address":cusAddress,
+        "tel":cusTel
+    }
+
+    $.ajax({
+        method:"PATCH",
+        url: `http://localhost:8080/Spring_Pos/api/v1/customer/${cusId}`,
+        processData:"false",
+        contentType: "application/json",
+        data: JSON.stringify(customer),
+        success:function(result){
+            genarateNextCustomerId();
+            setCustomerTableValues();
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Customer Update successfully",
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+        },
+        error: function(result){
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Customer Update failed",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    })
+
+})
