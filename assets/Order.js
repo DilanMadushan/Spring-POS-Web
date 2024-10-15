@@ -61,3 +61,22 @@ function setItemIDs(){
     })
 
 }
+
+
+$("#orderProId").change(function(){
+    var itemId =  $("#orderProId").val();
+
+    $.ajax({
+        method:"GET",
+        url:`http://localhost:8080/Spring_Pos/api/v1/item/${itemId}`,
+        success:function(items){
+            $('#proItemName').val(items.name);
+            $('#orderItemPrice').val(items.price);
+        },
+        error:function(items){
+            console.log(items);
+            
+        }
+    })
+
+});
