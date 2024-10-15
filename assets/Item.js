@@ -84,8 +84,8 @@ $('#addProduct').on('click', function(){
         contentType:"application/json",
         data:JSON.stringify(item),
         success:function(){
-            genarateNextItemId()
-            loadItemTable()
+            clearItemFields();
+            loadItemTable();
             Swal.fire({
                 position: "top-end",
                 icon: "success",
@@ -149,7 +149,7 @@ $('#updateProduct').on('click', function(){
         data:JSON.stringify(item),
         success:function(){
             loadItemTable();
-            genarateNextItemId();
+            clearItemFields();
             Swal.fire({
                 position: "top-end",
                 icon: "success",
@@ -196,7 +196,7 @@ $('#deleteProduct').on('click', function(){
                    url:`http://localhost:8080/Spring_Pos/api/v1/item/${proId}`,
                 success:function(){
                    loadItemTable();
-                   genarateNextItemId();
+                   clearItemFields();
                    Swal.fire({
                        position: "top-end",
                        icon: "success",
@@ -220,3 +220,11 @@ $('#deleteProduct').on('click', function(){
 
     })
 })
+
+function clearItemFields(){
+    genarateNextItemId();
+    $('#proName').val("");
+    $('#proPrice').val("");
+    $('#proQty').val("");
+}
+
