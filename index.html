@@ -244,10 +244,19 @@
 
         <div class="grid gap-6 mb-6 md:grid-cols-2 mx-10 my-5">
           <div>
-            <label for="proId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Id</label>
-            <select id="proId" name="proId"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              
-            </select>
+            <label
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Product Id</label
+            >
+            <input
+              type="text"
+              id="proId"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="P001"
+              required
+              value="P001"
+            />
+
           </div>
           <div>
             <label
@@ -472,7 +481,9 @@
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
     <script src="assets/navigation/spa.js" type="module"></script>
     <script src="assets/Customer.js"></script>
+    <script src="assets/Item.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
    
 
   </body>

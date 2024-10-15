@@ -15,6 +15,7 @@ $('#itemButton').on('click', function(){
     $('#customerSection').css({display:'none'});
     $('#orderSection').css({display:'none'});
     $('#cardSection').css({display:'none'});
+    genarateNextItemId()
 
 });
 
