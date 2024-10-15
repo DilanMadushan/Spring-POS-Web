@@ -105,3 +105,22 @@ $('#addProduct').on('click', function(){
         }
     })
 })
+
+$('#proTable').on('click', 'tr', function() {
+    const itemId = $(this).find('td').eq(0).text().trim();  
+    
+    $.ajax({
+        method:"GET",
+        url:`http://localhost:8080/Spring_Pos/api/v1/item/${itemId}`,
+        success: function(item){        
+            $('#proId').val(item.itemId);
+            $('#proName').val(item.name);
+            $('#proPrice').val(item.price);
+            $('#proQty').val(item.qty);
+
+        },
+        error: function(customer){
+            console.log(customer);
+        }
+    })
+});
