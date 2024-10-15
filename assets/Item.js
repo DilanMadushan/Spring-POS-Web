@@ -172,3 +172,51 @@ $('#updateProduct').on('click', function(){
 
 
 })
+
+
+
+$('#deleteProduct').on('click', function(){
+
+    var proId = $('#proId').val();
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+
+    }).then((result) =>{
+
+        if(result.isConfirmed){
+            $.ajax({
+                method:"DELETE",
+                   url:`http://localhost:8080/Spring_Pos/api/v1/item/${proId}`,
+                success:function(){
+                   loadItemTable();
+                   genarateNextItemId();
+                   Swal.fire({
+                       position: "top-end",
+                       icon: "success",
+                       title: "Product Delete successfully",
+                       showConfirmButton: false,
+                       timer: 1500
+                   });
+                   
+                   },
+                   error:function(){
+                       Swal.fire({
+                           position: "top-end",
+                           icon: "error",
+                           title: "Product Delete failed",
+                           showConfirmButton: false,
+                           timer: 1500
+                       });
+                   }
+               })
+        }
+
+    })
+})
