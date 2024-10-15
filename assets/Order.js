@@ -1,4 +1,4 @@
-var products = [];
+var itemDTOS = [];
 
 function genarateNewOrderId(){
 
@@ -169,6 +169,33 @@ function calculateTotal(price){
 
 
 $('#placeOrder').on('click',function (){
+    var tot = $('#totalPrice').text();
+    var cusId = $('#orderCusId').val();
+    var orderId = $('#orderId').text();
 
-
+    $.ajax({
+        method:"POST",
+        url:`http://localhost:8080/Spring_Pos/api/v1/order?orderId=${orderId}&cusId=${cusId}&totalPrice=${tot}`,
+        contentType:"application/json",
+        data:JSON.stringify(itemDTOS),
+        success:function(){
+            clearFields();
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Order Placed successfully",
+                showConfirmButton: false,
+                timer: 1500
+            }); 
+        },
+        error:function(){
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Order Placed failed",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    })
 })
