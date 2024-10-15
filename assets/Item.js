@@ -50,7 +50,7 @@ function loadItemTable(){
                 </td>
                 <td class="px-6 py-4">${item.name}</td>
                 <td class="px-6 py-4">${item.price}</td>
-                <td class="px-6 py-4">${item.price}</td>
+                <td class="px-6 py-4">${item.qty}</td>
               </tr>`)
             });
 
@@ -106,6 +106,7 @@ $('#addProduct').on('click', function(){
     })
 })
 
+
 $('#proTable').on('click', 'tr', function() {
     const itemId = $(this).find('td').eq(0).text().trim();  
     
@@ -124,3 +125,50 @@ $('#proTable').on('click', 'tr', function() {
         }
     })
 });
+
+
+
+$('#updateProduct').on('click', function(){
+
+    var proId =  $('#proId').val();
+    var proName = $('#proName').val();
+    var proPrice = $('#proPrice').val();
+    var proQty = $('#proQty').val();
+
+    var item = {
+        "name": proName,
+        "price": proPrice,
+        "qty": proQty
+    }
+
+    $.ajax({
+        method:"PATCH",
+        url:`http://localhost:8080/Spring_Pos/api/v1/item/${proId}`,
+        processData:false,
+        contentType:"application/json",
+        data:JSON.stringify(item),
+        success:function(){
+            loadItemTable();
+            genarateNextItemId();
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Product Update successfully",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        },
+        error: function(){
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Product update failed",
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+        }
+    })
+
+
+})
