@@ -1,6 +1,8 @@
 function setCustomerIds(){
-    
+
+    $('#orderCusId').empty();
     $('#orderCusId').append(`<option value="">Customer Id</option>`);
+
     $.ajax({
         method:"GET",
         url:"http://localhost:8080/Spring_Pos/api/v1/customer",
@@ -20,6 +22,8 @@ function setCustomerIds(){
     })
 }
 
+
+
 $('#orderCusId').change(function(){
     var cusId = $('#orderCusId').val();
 
@@ -35,3 +39,25 @@ $('#orderCusId').change(function(){
     })
     
 })
+
+
+function setItemIDs(){
+    $("#orderProId").empty();
+    $("#orderProId").append(`<option value="">Product Id</option>`);
+
+    $.ajax({
+        method:"GET",
+        url:"http://localhost:8080/Spring_Pos/api/v1/item",
+        success:function(items){
+            items.forEach(item => {
+                $("#orderProId").append(`<option value="${item.itemId}">${item.itemId}</option>`)
+            });
+
+        },
+        error:function(items){
+            console.log(items);
+            
+        }
+    })
+
+}
