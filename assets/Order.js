@@ -1,5 +1,37 @@
 var products = [];
 
+function genarateNewOrderId(){
+
+    $.ajax({
+        method:"GET",
+        url:"http://localhost:8080/Spring_Pos/api/v1/order/last",
+        success:function(id){
+
+            if(id == ""){
+                $('#orderId').text("O001")
+
+            }else{
+                var parts = id.split("O");
+                var num = parseInt(parts[1]);
+                var genNum = (num+1).toString();
+                if (genNum.length == 1){
+                    $("#orderId").text("O00"+genNum);
+                }else if(genNum.length == 2){
+                    $("#orderId").text("O0"+genNum);
+                }
+                else{
+                    $("#orderId").text("O"+genNum);
+                }
+            }
+
+        },
+        error:function(id){
+            console.log(id);
+        }
+    })
+}
+
+
 function setCustomerIds(){
 
     $('#orderCusId').empty();
@@ -88,7 +120,7 @@ $('#addOrder').on('click',function (){
     var cusId = $('#orderCusId').val();
     var proId = $('#orderProId').val();
     var proName = $('#proItemName').val();
-    var price = $('#orderItemPrice').val();
+    var price = parseFloat($('#orderItemPrice').val());
     var qtyOnHand = parseFloat($("#orderItemQtyOnHand").val());
     var qty = parseFloat($('#orderItemQty').val());
 
@@ -125,5 +157,18 @@ $('#addOrder').on('click',function (){
                 <td class="px-6 py-4"> ${price}</td>
                 <td class="px-6 py-4"> ${qty}</td>
               </tr>`);
+
+    calculateTotal(price*qty);
+
+})
+
+function calculateTotal(price){
+    var tot = parseFloat($('#totalPrice').text());
+    $('#totalPrice').text(tot+=price);
+}
+
+
+$('#placeOrder').on('click',function (){
+
 
 })

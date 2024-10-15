@@ -28,7 +28,7 @@ $('#orderButton').on('click', function(){
     $('#cardSection').css({display:'none'});
     setCustomerIds();
     setItemIDs();
-
+    genarateNewOrderId();
 });
 
 $(document).ready(function(){
