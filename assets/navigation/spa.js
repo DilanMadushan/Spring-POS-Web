@@ -26,6 +26,7 @@ $('#orderButton').on('click', function(){
     $('#customerSection').css({display:'none'});
     $('#itemSection').css({display:'none'});
     $('#cardSection').css({display:'none'});
+    setCustomerIds();
 
 });
 
