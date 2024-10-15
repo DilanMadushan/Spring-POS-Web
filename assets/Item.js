@@ -62,3 +62,46 @@ function loadItemTable(){
     })
 
 }
+
+$('#addProduct').on('click', function(){
+
+    var proId =   $('#proId').val();
+    var proName = $('#proName').val();
+    var proPrice = $('#proPrice').val();
+    var proQty = $('#proQty').val();
+
+    var item = {
+        "itemId": proId,
+        "name": proName,
+        "price": proPrice,
+        "qty": proQty
+    }
+
+    $.ajax({
+        method:"POST",
+        url:"http://localhost:8080/Spring_Pos/api/v1/item",
+        processData:false,
+        contentType:"application/json",
+        data:JSON.stringify(item),
+        success:function(){
+            genarateNextItemId()
+            loadItemTable()
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Product Added successfully",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        },
+        error:function(){
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Product Added failed",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    })
+})
