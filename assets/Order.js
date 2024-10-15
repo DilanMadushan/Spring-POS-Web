@@ -199,3 +199,16 @@ $('#placeOrder').on('click',function (){
         }
     })
 })
+
+function clearFields(){
+    genarateNewOrderId();
+    $('#orderProId').val("");
+    $('#orderCusId').val("");
+    $('#orderCustomerName').val("");
+    $('#proItemName').val("");
+    $('#orderItemPrice').val("");
+    $("#orderItemQtyOnHand").val("");
+    $('#orderItemQty').val("");
+    $('#orderTable').empty()
+    $('#totalPrice').text("");
+}
