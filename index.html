@@ -371,6 +371,7 @@
               id="orderCustomerName"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Dilan"
+              disabled
               required
             />
           </div>
@@ -390,6 +391,7 @@
               id="proItemName"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Cake"
+              disabled
               required
             />
           </div>
@@ -404,6 +406,22 @@
               id="orderItemPrice"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="100"
+              disabled
+              required
+            />
+          </div>
+
+          <div>
+            <label
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Qty on Hand</label
+            >
+            <input
+              type="number"
+              id="orderItemQtyOnHand"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="10"
+              disabled
               required
             />
           </div>
@@ -421,7 +439,12 @@
               required
             />
           </div>
-          <h1 class="inline-block mb-5 text-[25px]">Total : <span id="totalPrice">100</span>.00</h1>
+
+          <div>
+            <h1 class="text-[25px] mt-7">Total : <span id="totalPrice">100</span>.00</h1>
+          </div>
+
+          
           
         </div>
 
