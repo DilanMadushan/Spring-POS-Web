@@ -77,6 +77,11 @@ $('#addProduct').on('click', function(){
         "qty": proQty
     }
 
+    if(!validatItemeData(item)){
+        return
+    }
+    
+
     $.ajax({
         method:"POST",
         url:"http://localhost:8080/Spring_Pos/api/v1/item",
@@ -139,6 +144,10 @@ $('#updateProduct').on('click', function(){
         "name": proName,
         "price": proPrice,
         "qty": proQty
+    }
+
+    if(!validatItemeData(item)){
+        return
     }
 
     $.ajax({
@@ -226,5 +235,33 @@ function clearItemFields(){
     $('#proName').val("");
     $('#proPrice').val("");
     $('#proQty').val("");
+}
+
+
+function validatItemeData(item) {
+    const showError = (message) => {
+        Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: message,
+            showConfirmButton: false,
+            timer: 1500
+        });
+    };
+
+    const requiredFields = [
+        {field: item.itemId, message: "Item ID is required"},
+        {field: item.name, message: "Name is required"},
+        {field: item.price, message: "Price is required"},
+        {field: item.qty, message: "QTY is required"},
+    ];
+
+    for (let i = 0; i < requiredFields.length; i++) {
+        if (requiredFields[i].field === "") {
+            showError(requiredFields[i].message);
+            return false;
+        }
+    }
+    return true;
 }
 
