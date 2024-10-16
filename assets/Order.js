@@ -136,6 +136,10 @@ $('#addOrder').on('click',function (){
         return
     }
 
+    if(!validateOrderData()){
+        return
+    }
+
     products={
         "itemId": proId,
         "name": proName,
@@ -172,6 +176,17 @@ $('#placeOrder').on('click',function (){
     var tot = $('#totalPrice').text();
     var cusId = $('#orderCusId').val();
     var orderId = $('#orderId').text();
+
+    if(itemDTOS.length == 0){
+        Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "Cart is Empty",
+            showConfirmButton: false,
+            timer: 1500
+        });
+        return
+    }
 
     $.ajax({
         method:"POST",
@@ -212,4 +227,34 @@ function clearOrderFields(){
     $('#orderTable').empty()
     $('#totalPrice').text("");
     itemDTOS = [];
+}
+
+function validateOrderData() {
+    const showError = (message) => {
+        Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: message,
+            showConfirmButton: false,
+            timer: 1500
+        });
+    };
+
+    var cusId = $('#orderCusId').val();
+    var proId = $('#orderProId').val();
+    var qty = $('#orderItemQty').val();
+
+    const requiredFields = [
+        {field: cusId, message: "Customer ID is required"},
+        {field: proId, message: "Product Id is required"},
+        {field: qty, message: "Qty is required"},
+    ];
+
+    for (let i = 0; i < requiredFields.length; i++) {
+        if (requiredFields[i].field === "") {
+            showError(requiredFields[i].message);
+            return false;
+        }
+    }
+    return true;
 }
