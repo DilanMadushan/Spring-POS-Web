@@ -147,6 +147,8 @@ $('#addOrder').on('click',function (){
         "qty": qty
     }
 
+    itemDTOS.push(products);
+
 
     $('#orderTable').append(`<tr
                 class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
@@ -177,7 +179,10 @@ $('#placeOrder').on('click',function (){
     var cusId = $('#orderCusId').val();
     var orderId = $('#orderId').text();
 
-    if(itemDTOS.length == 0){
+    if (itemDTOS.length === 0) {
+        
+        console.log(itemDTOS.length);
+    
         Swal.fire({
             position: "top-end",
             icon: "error",
@@ -185,8 +190,10 @@ $('#placeOrder').on('click',function (){
             showConfirmButton: false,
             timer: 1500
         });
-        return
+
+        return; 
     }
+    
 
     $.ajax({
         method:"POST",
