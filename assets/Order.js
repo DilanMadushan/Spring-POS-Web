@@ -211,4 +211,5 @@ function clearFields(){
     $('#orderItemQty').val("");
     $('#orderTable').empty()
     $('#totalPrice').text("");
+    itemDTOS = [];
 }
