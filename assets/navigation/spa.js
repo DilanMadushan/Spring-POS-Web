@@ -50,6 +50,8 @@ function navigateToPos(){
     $('#itemSection').css({display:'none'});
     $('#logo-sidebar').css({display:'block'});
     $('#loginForm').css({display:'none'});
+    genarateNextCustomerId()
+    setCustomerTableValues()
 }
 
 
