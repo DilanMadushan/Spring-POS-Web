@@ -78,6 +78,10 @@ $('#addCustomer').on('click', function(){
         "tel":cusTel
     }
 
+    if(!validateData(customer)){
+        return
+    }
+
     $.ajax({
         method:"POST",
         url: "http://localhost:8080/Spring_Pos/api/v1/customer",
@@ -121,6 +125,10 @@ $("#updateCustomer").on('click' ,function(){
         "name":cusName,
         "address":cusAddress,
         "tel":cusTel
+    }
+
+    if(!validateData(customer)){
+        return
     }
 
     $.ajax({
@@ -225,4 +233,32 @@ function clearFields(){
     $('#cusName').val("");
     $('#cusAddress').val("");
     $('#cusTel').val("");
+}
+
+
+function validateData(customer) {
+    const showError = (message) => {
+        Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: message,
+            showConfirmButton: false,
+            timer: 1500
+        });
+    };
+
+    const requiredFields = [
+        {field: customer.cusId, message: "Customer ID is required"},
+        {field: customer.name, message: "Name is required"},
+        {field: customer.address, message: "address required"},
+        {field: customer.tel, message: "Tel is required"},
+    ];
+
+    for (let i = 0; i < requiredFields.length; i++) {
+        if (requiredFields[i].field === "") {
+            showError(requiredFields[i].message);
+            return false;
+        }
+    }
+    return true;
 }

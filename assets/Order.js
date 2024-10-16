@@ -179,7 +179,7 @@ $('#placeOrder').on('click',function (){
         contentType:"application/json",
         data:JSON.stringify(itemDTOS),
         success:function(){
-            clearFields();
+            clearOrderFields();
             Swal.fire({
                 position: "top-end",
                 icon: "success",
@@ -200,7 +200,7 @@ $('#placeOrder').on('click',function (){
     })
 })
 
-function clearFields(){
+function clearOrderFields(){
     genarateNewOrderId();
     $('#orderProId').val("");
     $('#orderCusId').val("");
